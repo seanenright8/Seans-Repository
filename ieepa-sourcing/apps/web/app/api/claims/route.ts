@@ -16,7 +16,7 @@ const claimPayloadSchema = z.object({
   ports_of_entry_raw: z.string().optional(),
   entries_count: z.coerce.number().int().positive().optional(),
   country_of_origin: z.string().optional(),
-  nda_agreed: z.boolean(),
+  nda_agreed: z.union([z.boolean(), z.string()]).transform((v) => v === true || v === 'true'),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
   utm_campaign: z.string().optional(),
