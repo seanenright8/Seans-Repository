@@ -15,7 +15,7 @@ export async function sendClaimConfirmation(
   const { data, error } = await resend.emails.send({
     from: FROM,
     to: claim.email,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     subject: 'We received your IEEPA claim submission',
     html: `
 <!DOCTYPE html>
@@ -175,7 +175,7 @@ export async function sendContactAck(name: string, email: string) {
   const { error } = await resend.emails.send({
     from: FROM,
     to: email,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     subject: 'We received your message',
     html: `
 <p>Hi ${name},</p>
