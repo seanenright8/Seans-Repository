@@ -31,7 +31,7 @@ const steps = [
 const faqs = [
   {
     q: 'How much is my claim worth?',
-    a: 'It depends on the total IEEPA duties you've paid. Claims typically range from $50K to several million dollars. Submit your details for a free assessment.',
+    a: "It depends on the total IEEPA duties you've paid. Claims typically range from $50K to several million dollars. Submit your details for a free assessment.",
   },
   {
     q: 'Is this legitimate?',
@@ -39,11 +39,11 @@ const faqs = [
   },
   {
     q: 'What if the courts rule against importers?',
-    a: 'That's our risk, not yours. Once we purchase your claim and wire payment, you keep the money regardless of the litigation outcome.',
+    a: "That's our risk, not yours. Once we purchase your claim and wire payment, you keep the money regardless of the litigation outcome.",
   },
   {
     q: 'Do I need a lawyer?',
-    a: 'Not to sell your claim to us. We handle all legal aspects post-purchase. You're welcome to have your own counsel review the assignment agreement.',
+    a: "Not to sell your claim to us. We handle all legal aspects post-purchase. You're welcome to have your own counsel review the assignment agreement.",
   },
 ]
 

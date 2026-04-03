@@ -3,7 +3,8 @@ import { createServiceClient } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const { data, error } = await supabase
       .from('outreach_log')
       .select('*')

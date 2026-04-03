@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
     }
 
     const { toEmail, toName, companyName, templateId, contactId, claimId } = parsed.data
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
 
     // Fetch template
     const { data: template, error: tmplError } = await supabase

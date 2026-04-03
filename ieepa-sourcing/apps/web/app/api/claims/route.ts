@@ -16,7 +16,7 @@ const claimPayloadSchema = z.object({
   ports_of_entry_raw: z.string().optional(),
   entries_count: z.coerce.number().int().positive().optional(),
   country_of_origin: z.string().optional(),
-  nda_agreed: z.boolean(),
+  nda_agreed: z.union([z.boolean(), z.string()]).transform((v) => v === true || v === 'true'),
   utm_source: z.string().optional(),
   utm_medium: z.string().optional(),
   utm_campaign: z.string().optional(),
@@ -29,7 +29,8 @@ export async function POST(req: NextRequest) {
     let rawData: Record<string, unknown>
     const uploadedFilePaths: string[] = []
 
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
 
     if (contentType.includes('multipart/form-data')) {
       const formData = await req.formData()
@@ -158,7 +159,8 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   // Returns all claims for admin (requires service role — protected by middleware)
   try {
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const { searchParams } = new URL(req.url)
     const status = searchParams.get('status')
 

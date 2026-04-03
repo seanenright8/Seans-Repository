@@ -23,7 +23,7 @@
     --border: 214 32% 91%;
     --input: 214 32% 91%;
     --ring: 222 47% 11%;
-    --radius: 0.5rem;
+    --radius: 0.125rem;
   }
 
   .dark {
@@ -56,9 +56,12 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply tracking-tight;
   }
 }
 
@@ -71,6 +74,13 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-widest text-gold-400;
+  }
+  .stat-number {
+    @apply text-3xl md:text-4xl font-semibold tabular-nums tracking-tight;
+    font-variant-numeric: tabular-nums;
   }
 }
 

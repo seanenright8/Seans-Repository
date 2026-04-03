@@ -24,7 +24,8 @@ export async function PATCH(
       )
     }
 
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
 
     // Fetch current claim to append activity log entry
     const { data: existing } = await supabase
@@ -69,7 +70,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const { data, error } = await supabase
       .from('claims')
       .select('*')

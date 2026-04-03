@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 import type { ClaimSubmissionPayload } from '@shared/types'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const getResend = () => new Resend(process.env.RESEND_API_KEY ?? 're_placeholder')
 
 const FROM = `${process.env.EMAIL_FROM_NAME ?? 'IEEPA Claims Fund'} <${process.env.EMAIL_FROM_ADDRESS ?? 'claims@example.com'}>`
 const REPLY_TO = process.env.EMAIL_REPLY_TO ?? process.env.ADMIN_EMAIL ?? ''
@@ -12,10 +12,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://yourdomain.com'
 export async function sendClaimConfirmation(
   claim: ClaimSubmissionPayload & { id: string }
 ) {
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: FROM,
     to: claim.email,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     subject: 'We received your IEEPA claim submission',
     html: `
 <!DOCTYPE html>
@@ -88,7 +88,7 @@ export async function sendInternalClaimNotification(
   const adminEmail = process.env.ADMIN_EMAIL
   if (!adminEmail) return
 
-  const { data, error } = await resend.emails.send({
+  const { data, error } = await getResend().emails.send({
     from: FROM,
     to: adminEmail,
     subject: `[NEW CLAIM] ${claim.company_name} — ${claim.total_tariff_amount ? '$' + claim.total_tariff_amount.toLocaleString() : 'Amount TBD'}`,
@@ -172,10 +172,10 @@ export async function sendSlackNotification(
 // ── Contact form acknowledgement ──────────────────────────────
 
 export async function sendContactAck(name: string, email: string) {
-  const { error } = await resend.emails.send({
+  const { error } = await getResend().emails.send({
     from: FROM,
     to: email,
-    replyTo: REPLY_TO,
+    reply_to: REPLY_TO,
     subject: 'We received your message',
     html: `
 <p>Hi ${name},</p>

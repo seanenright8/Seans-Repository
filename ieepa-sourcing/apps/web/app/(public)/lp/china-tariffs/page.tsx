@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const painPoints = [
   'Paid 25%+ tariffs on Chinese imports since April 2025',
   'Cash tied up in duties that may be ruled illegal',
-  'Don't want to wait years for a court refund',
+  "Don't want to wait years for a court refund",
   'Need capital now for inventory, payroll, or growth',
 ]
 
