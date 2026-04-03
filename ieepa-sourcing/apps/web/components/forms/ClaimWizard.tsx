@@ -177,10 +177,18 @@ export function ClaimWizard({ utmSource }: { utmSource?: string }) {
         formData.append('files', file)
       })
 
-      const res = await fetch('/api/claims', {
-        method: 'POST',
-        body: formData,
-      })
+      const controller = new AbortController()
+      const timeout = setTimeout(() => controller.abort(), 30000)
+      let res: Response
+      try {
+        res = await fetch('/api/claims', {
+          method: 'POST',
+          body: formData,
+          signal: controller.signal,
+        })
+      } finally {
+        clearTimeout(timeout)
+      }
 
       const json = await res.json()
 

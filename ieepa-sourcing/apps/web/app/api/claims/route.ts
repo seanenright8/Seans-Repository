@@ -40,20 +40,24 @@ export async function POST(req: NextRequest) {
       }
       rawData = JSON.parse(dataStr)
 
-      // Upload files to Supabase Storage
+      // Upload files to Supabase Storage (best-effort — failures don't block submission)
       const files = formData.getAll('files') as File[]
       for (const file of files) {
         if (!(file instanceof File)) continue
-        const ext = file.name.split('.').pop()
-        const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
-        const buffer = Buffer.from(await file.arrayBuffer())
-        const { error: uploadError } = await supabase.storage
-          .from('claim-documents')
-          .upload(path, buffer, { contentType: file.type, upsert: false })
-        if (!uploadError) {
-          uploadedFilePaths.push(path)
-        } else {
-          console.error('[claims/upload] Storage error:', uploadError)
+        try {
+          const ext = file.name.split('.').pop()
+          const path = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+          const buffer = Buffer.from(await file.arrayBuffer())
+          const { error: uploadError } = await supabase.storage
+            .from('claim-documents')
+            .upload(path, buffer, { contentType: file.type, upsert: false })
+          if (!uploadError) {
+            uploadedFilePaths.push(path)
+          } else {
+            console.error('[claims/upload] Storage error:', uploadError.message)
+          }
+        } catch (uploadErr) {
+          console.error('[claims/upload] Unexpected error:', uploadErr)
         }
       }
     } else {

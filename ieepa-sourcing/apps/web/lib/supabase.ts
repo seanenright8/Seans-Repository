@@ -1,4 +1,5 @@
 import { createBrowserClient } from '@supabase/ssr'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import type { Database } from '@shared/types'
 
 // ── Browser client (use in Client Components) ─────────────────
@@ -9,9 +10,9 @@ export function createClient() {
   )
 }
 
-// ── Service-role client (use only in trusted server contexts) ──
+// ── Service-role client (use only in server API routes) ────────
 export function createServiceClient() {
-  return createBrowserClient<Database>(
+  return createSupabaseClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
