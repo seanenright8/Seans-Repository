@@ -39,8 +39,7 @@ export async function createServerSupabaseClient() {
 // ── Service-role client (use only in trusted server contexts) ──
 // Never expose SUPABASE_SERVICE_ROLE_KEY to the browser.
 export function createServiceClient() {
-  const { createClient: createSupabaseClient } = require('@supabase/supabase-js')
-  return createSupabaseClient<Database>(
+  return createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
