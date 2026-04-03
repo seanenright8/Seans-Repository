@@ -31,7 +31,7 @@ export async function PATCH(
       .from('claims')
       .select('activity_log, status')
       .eq('id', params.id)
-      .single()
+      .single() as { data: { activity_log: unknown[]; status: string } | null; error: unknown }
 
     const activityLog = Array.isArray(existing?.activity_log) ? existing.activity_log : []
     const updates: Record<string, unknown> = { ...parsed.data }
