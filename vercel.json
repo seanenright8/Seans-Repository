@@ -1,7 +1,6 @@
 {
-  "rootDirectory": "ieepa-sourcing/apps/web",
   "framework": "nextjs",
-  "buildCommand": "next build",
-  "installCommand": "npm install",
-  "outputDirectory": ".next"
+  "buildCommand": "cd ieepa-sourcing/apps/web && npm install && npm run build",
+  "outputDirectory": "ieepa-sourcing/apps/web/.next",
+  "installCommand": "echo 'skip'"
 }
