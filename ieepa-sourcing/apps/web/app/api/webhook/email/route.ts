@@ -25,7 +25,8 @@ export async function POST(req: NextRequest) {
     // Verify webhook signature (Resend sends svix-signature header)
     // For production, verify: https://resend.com/docs/dashboard/webhooks/introduction
     const body: ResendWebhookEvent = await req.json()
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
 
     const providerId = body.data.email_id
     const now = new Date().toISOString()

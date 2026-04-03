@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const { error } = await supabase.from('contact_messages').insert(parsed.data)
 
     if (error) {

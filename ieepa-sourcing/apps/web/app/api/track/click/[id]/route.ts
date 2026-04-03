@@ -9,7 +9,8 @@ export async function GET(
   const dest = searchParams.get('url')
 
   try {
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const now = new Date().toISOString()
 
     await supabase

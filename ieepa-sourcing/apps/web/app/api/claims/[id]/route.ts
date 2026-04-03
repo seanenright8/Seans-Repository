@@ -24,14 +24,15 @@ export async function PATCH(
       )
     }
 
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
 
     // Fetch current claim to append activity log entry
     const { data: existing } = await supabase
       .from('claims')
       .select('activity_log, status')
       .eq('id', params.id)
-      .single() as { data: { activity_log: unknown[]; status: string } | null; error: unknown }
+      .single()
 
     const activityLog = Array.isArray(existing?.activity_log) ? existing.activity_log : []
     const updates: Record<string, unknown> = { ...parsed.data }
@@ -69,7 +70,8 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
-    const supabase = createServiceClient()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const supabase = createServiceClient() as any
     const { data, error } = await supabase
       .from('claims')
       .select('*')
