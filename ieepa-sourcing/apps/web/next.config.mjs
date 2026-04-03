@@ -1,7 +1,6 @@
-import type { NextConfig } from 'next'
-
-const nextConfig: NextConfig = {
-  pageExtensions: ['ts', 'tsx', 'mdx'],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   images: {
     remotePatterns: [
       {
@@ -9,9 +8,6 @@ const nextConfig: NextConfig = {
         hostname: '*.supabase.co',
       },
     ],
-  },
-  experimental: {
-    mdxRs: false,
   },
 }
 
