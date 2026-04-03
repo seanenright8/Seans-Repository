@@ -1,12 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import {
-  ArrowRight,
-  Shield,
-  Clock,
-  DollarSign,
-  FileText,
-} from 'lucide-react'
+import { ArrowRight, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Accordion,
@@ -21,11 +15,37 @@ export const metadata: Metadata = {
     'If your company has paid tariffs under IEEPA authority, you may be sitting on a transferable financial claim worth real money. We buy IEEPA claims for immediate cash. 24-hour quote. 5-day close.',
 }
 
-const heroStats = [
+const stats = [
   { number: '$2B+', label: 'Claims Evaluated' },
   { number: '200+', label: 'Importers Served' },
-  { number: '24-Hour', label: 'Quote Turnaround' },
-  { number: '5-Day', label: 'Close to Wire' },
+  { number: '24 hrs', label: 'Quote Turnaround' },
+  { number: '5 days', label: 'Average Close' },
+]
+
+const claimTypes = [
+  'Reciprocal tariffs imposed under IEEPA §1702',
+  'China tariffs (IEEPA-basis, 2025 escalations)',
+  'EU, Canada, Mexico IEEPA-basis duties',
+  'Country-specific IEEPA tariff orders',
+  'Emergency tariffs on specific commodities',
+]
+
+const whySell = [
+  {
+    number: '01',
+    title: 'Certainty over years of waiting',
+    body: 'IEEPA litigation at the Court of International Trade moves slowly. A resolution — if one comes — could be years away. Selling today converts an uncertain future recovery into certain cash now.',
+  },
+  {
+    number: '02',
+    title: 'Eliminate litigation risk entirely',
+    body: 'Courts could rule against importers, or Congress could act to validate the tariffs. By selling, you transfer that outcome risk to us and lock in recovery regardless of how the legal landscape evolves.',
+  },
+  {
+    number: '03',
+    title: 'Immediate working capital',
+    body: 'Recovered capital can be redeployed immediately — into operations, inventory, or debt reduction. The cost of waiting is the time value of money plus the uncertainty premium.',
+  },
 ]
 
 const steps = [
@@ -49,12 +69,23 @@ const steps = [
   },
 ]
 
-const claimTypes = [
-  'Reciprocal tariffs imposed under IEEPA §1702',
-  'China tariffs (IEEPA-basis, 2025 escalations)',
-  'EU, Canada, Mexico IEEPA-basis duties',
-  'Country-specific IEEPA tariff orders',
-  'Emergency tariffs on specific commodities',
+const whyUs = [
+  {
+    title: 'Committed Capital',
+    body: 'We have dedicated AUM for IEEPA claim acquisitions. No fundraising delays. If we issue a term sheet, we can close.',
+  },
+  {
+    title: 'Trade Law Expertise',
+    body: 'Our team has deep knowledge of IEEPA, Section 301, and CIT litigation. We know what makes a claim strong — and we price accordingly.',
+  },
+  {
+    title: 'Confidentiality First',
+    body: 'We sign NDAs before substantive discussions. We never disclose counterparty information. Your competitors will not know you engaged with us.',
+  },
+  {
+    title: 'No Legal Fees, No Risk',
+    body: "You pay nothing to submit. If we don't transact, you've lost nothing. The process is non-binding until you execute a purchase agreement.",
+  },
 ]
 
 const faqs = [
@@ -96,32 +127,29 @@ export default function LandingPage() {
   return (
     <>
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section className="relative bg-navy-500 text-white overflow-hidden">
-        <div className="container relative py-24 md:py-36">
-          <div className="max-w-3xl">
-            <div className="w-12 h-0.5 bg-gold-400 mb-6" />
-            <h1 className="font-display text-5xl md:text-7xl font-normal leading-tight text-balance mb-6">
+      <section className="bg-navy-500 text-white">
+        <div className="container py-24 md:py-36">
+          <div className="max-w-4xl">
+            <div className="w-10 h-0.5 bg-gold-400 mb-8" />
+            <p className="text-gold-400/80 text-xs font-medium uppercase tracking-[0.2em] mb-6">
+              Institutional Buyer · IEEPA Tariff Claims
+            </p>
+            <h1 className="font-display text-5xl md:text-7xl font-normal leading-[1.05] text-balance mb-8">
               Your IEEPA tariff payments may be worth real money today.
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl">
+            <p className="text-white/55 text-lg leading-relaxed mb-12 max-w-2xl">
               If your company has paid tariffs under IEEPA authority, you may be sitting on a
               transferable financial claim. We buy these claims for immediate cash — you eliminate
               uncertainty and litigation risk, we assume it.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button variant="gold" size="xl" asChild>
+              <Button variant="gold" size="lg" asChild>
                 <Link href="/submit">
-                  Get a Quote in 24 Hours <ArrowRight className="ml-1 h-5 w-5" />
+                  Get a Quote in 24 Hours <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button
-                variant="outline-gold"
-                size="xl"
-                asChild
-              >
-                <Link href="/learn/what-are-ieepa-tariff-claims">
-                  Learn How It Works
-                </Link>
+              <Button variant="ghost" size="lg" asChild className="text-white/70 hover:text-white hover:bg-white/10">
+                <Link href="/learn/what-are-ieepa-tariff-claims">Learn How It Works</Link>
               </Button>
             </div>
           </div>
@@ -130,11 +158,11 @@ export default function LandingPage() {
         {/* Stats row */}
         <div className="border-t border-white/10">
           <div className="container py-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10">
-              {heroStats.map(({ number, label }) => (
-                <div key={label} className="md:px-8 first:pl-0 last:pr-0">
-                  <p className="stat-number text-white">{number}</p>
-                  <p className="text-white/50 text-sm mt-1 tracking-wide">{label}</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map(({ number, label }) => (
+                <div key={label}>
+                  <p className="font-display text-3xl md:text-4xl font-normal text-white mb-1">{number}</p>
+                  <p className="text-white/40 text-xs uppercase tracking-widest">{label}</p>
                 </div>
               ))}
             </div>
@@ -143,55 +171,63 @@ export default function LandingPage() {
       </section>
 
       {/* ── What Is an IEEPA Claim? ──────────────────────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="section-label mb-4">Background</p>
-              <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 mb-6 text-balance leading-tight">
+              <div className="w-8 h-0.5 bg-gold-400 mb-6" />
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold-500 mb-4">Background</p>
+              <h2 className="font-display text-4xl md:text-5xl font-normal text-navy-500 mb-8 leading-tight">
                 What is an IEEPA tariff claim?
               </h2>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                The International Emergency Economic Powers Act (IEEPA) grants the President broad
-                authority to impose tariffs in response to national emergencies. Beginning in 2025,
-                the executive branch used IEEPA to impose sweeping "reciprocal tariffs" on imports
-                from dozens of countries — in some cases as high as 145%.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                These tariffs are being challenged in federal court — including before the Court of
-                International Trade — on the grounds that the President exceeded his statutory
-                authority. If courts ultimately agree and order refunds, importers who paid these
-                duties would be entitled to restitution.
-              </p>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                That potential future recovery is what we buy today — at a discount that reflects the
-                time value and litigation risk. You get cash now; we take on the uncertainty.
-              </p>
-              <Button variant="default" asChild>
-                <Link href="/learn/what-are-ieepa-tariff-claims">
-                  Read the full explainer <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="space-y-4 text-gray-600 leading-relaxed text-sm">
+                <p>
+                  The International Emergency Economic Powers Act (IEEPA) grants the President broad
+                  authority to impose tariffs in response to national emergencies. Beginning in 2025,
+                  the executive branch used IEEPA to impose sweeping "reciprocal tariffs" on imports
+                  from dozens of countries — in some cases as high as 145%.
+                </p>
+                <p>
+                  These tariffs are being challenged in federal court — including before the Court of
+                  International Trade — on the grounds that the President exceeded his statutory
+                  authority. If courts ultimately agree and order refunds, importers who paid these
+                  duties would be entitled to restitution.
+                </p>
+                <p>
+                  That potential future recovery is what we buy today — at a discount that reflects the
+                  time value and litigation risk. You get cash now; we take on the uncertainty.
+                </p>
+              </div>
+              <Link
+                href="/learn/what-are-ieepa-tariff-claims"
+                className="inline-flex items-center gap-2 mt-8 text-sm font-medium text-navy-500 border-b border-navy-500/30 pb-0.5 hover:border-navy-500 transition-colors"
+              >
+                Read the full explainer <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
             </div>
-            <div className="space-y-4">
-              <div className="border border-gray-200 p-6">
-                <p className="section-label mb-5">Claim Types We Evaluate</p>
+
+            <div className="space-y-4 pt-2">
+              <div className="border border-gray-200 border-t-2 border-t-gold-400 p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-400 mb-5">
+                  Claim Types We Evaluate
+                </p>
                 <ul className="space-y-3">
                   {claimTypes.map((type) => (
-                    <li key={type} className="flex items-start gap-3 text-sm text-foreground">
-                      <span className="mt-1.5 block w-3 h-0.5 bg-gold-400 shrink-0" />
+                    <li key={type} className="flex items-start gap-3 text-sm text-gray-700">
+                      <span className="mt-2 h-1 w-1 rounded-full bg-gold-400 shrink-0" />
                       {type}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="border border-gray-200 border-t-2 border-t-gold-400 p-6">
-                <p className="section-label mb-3">Who Should Submit?</p>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+              <div className="bg-gray-50 border border-gray-200 p-6">
+                <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-400 mb-3">
+                  Who Should Submit
+                </p>
+                <p className="text-sm text-gray-600 leading-relaxed">
                   U.S. importers who paid IEEPA-basis tariffs since 2025, freight forwarders
                   holding claims on behalf of importers, customs brokers with documented client
-                  exposure, or any company with significant duty payments under an IEEPA executive
-                  order.
+                  exposure, or any company with significant duty payments under an IEEPA executive order.
                 </p>
               </div>
             </div>
@@ -199,78 +235,56 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Why Sell? ────────────────────────────────────────── */}
-      <section className="py-20 bg-gray-50">
+      {/* ── Why Sell ─────────────────────────────────────────── */}
+      <section className="py-24 bg-gray-50">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="section-label mb-3">The Case for Selling</p>
-            <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 mb-4 leading-tight">
+          <div className="max-w-xl mb-14">
+            <div className="w-8 h-0.5 bg-gold-400 mb-6" />
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold-500 mb-4">The Case for Selling</p>
+            <h2 className="font-display text-4xl md:text-5xl font-normal text-navy-500 leading-tight">
               Why importers sell their claims
             </h2>
-            <p className="text-muted-foreground">
-              Litigation is slow, expensive, and uncertain. Selling offers a different calculus.
-            </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: Clock,
-                title: 'Certainty over years of waiting',
-                body: 'IEEPA litigation at the Court of International Trade moves slowly. A resolution — if one comes — could be years away. Selling today converts an uncertain future recovery into certain cash now.',
-              },
-              {
-                icon: Shield,
-                title: 'Eliminate litigation risk',
-                body: 'Courts could rule against importers, or Congress could act to validate the tariffs. By selling, you transfer that outcome risk to us and lock in recovery regardless of how the legal landscape evolves.',
-              },
-              {
-                icon: DollarSign,
-                title: 'Immediate working capital',
-                body: 'Recovered capital can be redeployed immediately — into operations, inventory, or debt reduction. The cost of waiting is the time value of money plus the uncertainty premium.',
-              },
-            ].map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="bg-white border border-gray-200 border-t-2 border-t-gold-400 p-6 transition-shadow hover:shadow-sm"
-              >
-                <Icon className="h-5 w-5 text-navy-500 mb-4" />
-                <h3 className="font-semibold text-navy-500 mb-2">{title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
+          <div className="grid md:grid-cols-3 gap-px bg-gray-200">
+            {whySell.map(({ number, title, body }) => (
+              <div key={number} className="bg-white p-8 group hover:bg-gray-50 transition-colors">
+                <p className="font-display text-4xl font-normal text-gray-100 group-hover:text-gold-400/30 transition-colors mb-6">
+                  {number}
+                </p>
+                <h3 className="font-semibold text-navy-500 mb-3 leading-snug text-sm">{title}</h3>
+                <p className="text-sm text-gray-500 leading-relaxed">{body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Process Steps ────────────────────────────────────── */}
-      <section className="py-20 bg-navy-500 text-white">
+      {/* ── Process ──────────────────────────────────────────── */}
+      <section className="py-24 bg-navy-500 text-white">
         <div className="container">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="section-label mb-3">The Process</p>
-            <h2 className="font-display text-3xl md:text-4xl font-normal mb-4 leading-tight">
+          <div className="max-w-xl mb-16">
+            <div className="w-8 h-0.5 bg-gold-400 mb-6" />
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold-400/70 mb-4">The Process</p>
+            <h2 className="font-display text-4xl md:text-5xl font-normal leading-tight">
               Three steps to getting paid
             </h2>
-            <p className="text-white/60">
+            <p className="text-white/50 mt-4 text-sm">
               From first contact to wire transfer in as little as 10 business days.
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-px bg-white/10">
             {steps.map(({ number, title, description }) => (
-              <div key={number} className="bg-navy-500 p-8 border-t-2 border-t-gold-400">
-                <p className="font-display text-5xl font-normal text-gold-400/40 mb-4 leading-none">
-                  {number}
-                </p>
-                <h3 className="font-semibold text-lg mb-3">{title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">
-                  {description}
-                </p>
+              <div key={number} className="bg-navy-500 p-8 border-t-2 border-t-gold-400/20 hover:border-t-gold-400 transition-colors">
+                <p className="font-display text-5xl font-normal text-white/10 mb-6">{number}</p>
+                <h3 className="font-semibold text-white mb-3 text-sm">{title}</h3>
+                <p className="text-white/50 text-sm leading-relaxed">{description}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Button variant="gold" size="xl" asChild>
+          <div className="mt-12">
+            <Button variant="gold" size="lg" asChild>
               <Link href="/submit">
-                Start Your Submission <ArrowRight className="ml-1 h-5 w-5" />
+                Start Your Submission <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>
@@ -278,103 +292,97 @@ export default function LandingPage() {
       </section>
 
       {/* ── Why Choose Us ────────────────────────────────────── */}
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white">
         <div className="container">
           <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className="space-y-8">
-              <div>
-                <p className="section-label mb-4">Why Us</p>
-                <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 text-balance leading-tight">
-                  The institutional buyer importers trust
-                </h2>
-              </div>
-              {[
-                {
-                  title: 'Committed Capital',
-                  body: "We have dedicated AUM for IEEPA claim acquisitions. No fundraising delays. If we issue a term sheet, we can close.",
-                },
-                {
-                  title: 'Trade Law Expertise',
-                  body: "Our team has deep knowledge of IEEPA, Section 301, and CIT litigation. We know what makes a claim strong — and we price accordingly.",
-                },
-                {
-                  title: 'Confidentiality First',
-                  body: "We sign NDAs before substantive discussions. We never disclose counterparty information. Your competitors will not know you engaged with us.",
-                },
-                {
-                  title: 'No Legal Fees, No Risk',
-                  body: "You pay nothing to submit. If we don't transact, you've lost nothing. The process is non-binding until you execute a purchase agreement.",
-                },
-              ].map(({ title, body }) => (
-                <div key={title} className="flex gap-4 border-l-2 border-gold-400 pl-4">
-                  <div>
-                    <p className="font-semibold text-navy-500 mb-0.5">{title}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
+            <div>
+              <div className="w-8 h-0.5 bg-gold-400 mb-6" />
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold-500 mb-4">Why Us</p>
+              <h2 className="font-display text-4xl md:text-5xl font-normal text-navy-500 mb-10 leading-tight">
+                The institutional buyer importers trust
+              </h2>
+              <div className="space-y-7">
+                {whyUs.map(({ title, body }) => (
+                  <div key={title} className="border-l-2 border-gold-400/30 pl-5 hover:border-gold-400 transition-colors">
+                    <p className="font-semibold text-navy-500 mb-1 text-sm">{title}</p>
+                    <p className="text-sm text-gray-500 leading-relaxed">{body}</p>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
             <div className="border border-gray-200 border-t-2 border-t-gold-400 p-8">
-              <FileText className="h-6 w-6 text-gold-400 mb-5" />
-              <h3 className="font-display text-xl font-normal text-navy-500 mb-3 leading-snug">
-                Ready to find out what your claim is worth?
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-400 mb-6">Start Here</p>
+              <h3 className="font-display text-2xl font-normal text-navy-500 mb-4 leading-snug">
+                Find out what your claim is worth
               </h3>
-              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+              <p className="text-sm text-gray-500 leading-relaxed mb-8">
                 Submit your claim details in under 10 minutes. We'll review and come back
                 to you within 24 hours with a preliminary assessment — no commitment required.
               </p>
-              <Button variant="default" size="lg" asChild className="w-full">
-                <Link href="/submit">Submit a Claim <ArrowRight className="ml-1 h-4 w-4" /></Link>
+              <Button variant="default" size="lg" asChild className="w-full justify-center">
+                <Link href="/submit">Submit a Claim</Link>
               </Button>
-              <p className="text-muted-foreground text-xs text-center mt-4">
-                Confidential &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; No legal fees
-              </p>
+              <div className="flex items-center justify-center gap-5 mt-5">
+                {['Confidential', 'No commitment', 'No legal fees'].map((item) => (
+                  <span key={item} className="text-xs text-gray-400 flex items-center gap-1">
+                    <CheckCircle className="h-3 w-3 text-gold-400" />
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────────── */}
-      <section className="py-20 bg-white" id="faq">
+      <section className="py-24 bg-gray-50" id="faq">
         <div className="container max-w-3xl">
           <div className="mb-12">
-            <p className="section-label mb-3">FAQ</p>
-            <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 leading-tight">
+            <div className="w-8 h-0.5 bg-gold-400 mb-6" />
+            <p className="text-xs font-medium uppercase tracking-[0.2em] text-gold-500 mb-4">FAQ</p>
+            <h2 className="font-display text-4xl md:text-5xl font-normal text-navy-500">
               Frequently asked questions
             </h2>
           </div>
-          <Accordion type="single" collapsible className="divide-y divide-gray-200 border-t border-gray-200">
-            {faqs.map(({ q, a }, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border-0">
-                <AccordionTrigger className="text-navy-500 font-medium text-left py-5 hover:no-underline">
-                  {q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5">{a}</AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          <div className="bg-white border border-gray-200 divide-y divide-gray-100">
+            <Accordion type="single" collapsible>
+              {faqs.map(({ q, a }, i) => (
+                <AccordionItem key={i} value={`item-${i}`} className="border-0 px-6">
+                  <AccordionTrigger className="text-navy-500 font-medium text-left py-5 text-sm hover:no-underline">
+                    {q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-500 text-sm leading-relaxed pb-5">
+                    {a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
         </div>
       </section>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="py-24 bg-navy-500 text-white text-center">
-        <div className="container max-w-2xl">
-          <div className="w-12 h-0.5 bg-gold-400 mx-auto mb-8" />
-          <h2 className="font-display text-3xl md:text-5xl font-normal mb-4 leading-tight">
+      <section className="py-24 bg-navy-500 text-white">
+        <div className="container max-w-3xl">
+          <div className="w-8 h-0.5 bg-gold-400 mb-8" />
+          <h2 className="font-display text-4xl md:text-6xl font-normal mb-6 leading-tight">
             Don't leave money on the table.
           </h2>
-          <p className="text-white/60 text-lg mb-10 max-w-lg mx-auto">
+          <p className="text-white/50 text-lg mb-10 max-w-xl leading-relaxed">
             IEEPA tariff payments are compounding daily. Get a no-obligation assessment
             of what your claim may be worth — in 24 hours.
           </p>
-          <Button variant="gold" size="xl" asChild>
-            <Link href="/submit">
-              Get a Quote in 24 Hours <ArrowRight className="ml-1 h-5 w-5" />
-            </Link>
-          </Button>
-          <p className="text-white/30 text-xs mt-5">
-            Confidential &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Not legal advice
-          </p>
+          <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+            <Button variant="gold" size="lg" asChild>
+              <Link href="/submit">
+                Get a Quote in 24 Hours <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <p className="text-white/25 text-xs">
+              Confidential · No commitment · Not legal advice
+            </p>
+          </div>
         </div>
       </section>
     </>
