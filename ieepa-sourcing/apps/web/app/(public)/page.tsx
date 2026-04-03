@@ -6,10 +6,6 @@ import {
   Clock,
   DollarSign,
   FileText,
-  CheckCircle,
-  Building2,
-  Lock,
-  Zap,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -25,11 +21,11 @@ export const metadata: Metadata = {
     'If your company has paid tariffs under IEEPA authority, you may be sitting on a transferable financial claim worth real money. We buy IEEPA claims for immediate cash. 24-hour quote. 5-day close.',
 }
 
-const trustSignals = [
-  { icon: Building2, text: 'Institutional Buyer' },
-  { icon: Shield, text: 'NDA-Ready' },
-  { icon: Clock, text: '24-Hour Quote' },
-  { icon: Zap, text: '5-Day Close' },
+const heroStats = [
+  { number: '$2B+', label: 'Claims Evaluated' },
+  { number: '200+', label: 'Importers Served' },
+  { number: '24-Hour', label: 'Quote Turnaround' },
+  { number: '5-Day', label: 'Close to Wire' },
 ]
 
 const steps = [
@@ -101,26 +97,13 @@ export default function LandingPage() {
     <>
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative bg-navy-500 text-white overflow-hidden">
-        {/* Subtle grid pattern */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(201,168,76,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.4) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-        <div className="container relative py-24 md:py-32">
+        <div className="container relative py-24 md:py-36">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-gold-400/30 bg-gold-400/10 px-4 py-1.5 text-gold-400 text-sm font-medium mb-8">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold-400 animate-pulse" />
-              Now buying IEEPA tariff claims — 24-hour quote
-            </div>
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight text-balance mb-6">
-              Your IEEPA tariff payments may be{' '}
-              <span className="text-gradient-gold">worth real money today.</span>
+            <div className="w-12 h-0.5 bg-gold-400 mb-6" />
+            <h1 className="font-display text-5xl md:text-7xl font-normal leading-tight text-balance mb-6">
+              Your IEEPA tariff payments may be worth real money today.
             </h1>
-            <p className="text-xl text-white/70 leading-relaxed mb-10 max-w-2xl">
+            <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl">
               If your company has paid tariffs under IEEPA authority, you may be sitting on a
               transferable financial claim. We buy these claims for immediate cash — you eliminate
               uncertainty and litigation risk, we assume it.
@@ -143,25 +126,17 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </section>
 
-      {/* ── Trust Signals Bar ────────────────────────────────── */}
-      <section className="bg-navy-600 border-y border-white/10">
-        <div className="container py-5">
-          <div className="flex flex-wrap items-center justify-center md:justify-between gap-6 md:gap-0">
-            {trustSignals.map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2 text-white/80">
-                <Icon className="h-4 w-4 text-gold-400" />
-                <span className="text-sm font-medium">{text}</span>
-              </div>
-            ))}
-            <div className="hidden md:flex items-center gap-2 text-white/80">
-              <Lock className="h-4 w-4 text-gold-400" />
-              <span className="text-sm font-medium">NDA on Every Engagement</span>
-            </div>
-            <div className="hidden md:flex items-center gap-2 text-white/80">
-              <DollarSign className="h-4 w-4 text-gold-400" />
-              <span className="text-sm font-medium">AUM-Backed Capital</span>
+        {/* Stats row */}
+        <div className="border-t border-white/10">
+          <div className="container py-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-0 md:divide-x md:divide-white/10">
+              {heroStats.map(({ number, label }) => (
+                <div key={label} className="md:px-8 first:pl-0 last:pr-0">
+                  <p className="stat-number text-white">{number}</p>
+                  <p className="text-white/50 text-sm mt-1 tracking-wide">{label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -170,12 +145,10 @@ export default function LandingPage() {
       {/* ── What Is an IEEPA Claim? ──────────────────────────── */}
       <section className="py-20 bg-white">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-16 items-start">
             <div>
-              <p className="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">
-                Background
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-navy-500 mb-6 text-balance">
+              <p className="section-label mb-4">Background</p>
+              <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 mb-6 text-balance leading-tight">
                 What is an IEEPA tariff claim?
               </h2>
               <p className="text-muted-foreground leading-relaxed mb-4">
@@ -190,7 +163,7 @@ export default function LandingPage() {
                 authority. If courts ultimately agree and order refunds, importers who paid these
                 duties would be entitled to restitution.
               </p>
-              <p className="text-muted-foreground leading-relaxed mb-6">
+              <p className="text-muted-foreground leading-relaxed mb-8">
                 That potential future recovery is what we buy today — at a discount that reflects the
                 time value and litigation risk. You get cash now; we take on the uncertainty.
               </p>
@@ -201,24 +174,20 @@ export default function LandingPage() {
               </Button>
             </div>
             <div className="space-y-4">
-              <div className="rounded-xl border border-border bg-muted/30 p-6">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-                  Claim Types We Evaluate
-                </p>
+              <div className="border border-gray-200 p-6">
+                <p className="section-label mb-5">Claim Types We Evaluate</p>
                 <ul className="space-y-3">
                   {claimTypes.map((type) => (
                     <li key={type} className="flex items-start gap-3 text-sm text-foreground">
-                      <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
+                      <span className="mt-1.5 block w-3 h-0.5 bg-gold-400 shrink-0" />
                       {type}
                     </li>
                   ))}
                 </ul>
               </div>
-              <div className="rounded-xl bg-navy-500 text-white p-6">
-                <p className="text-gold-400 text-xs font-semibold uppercase tracking-wider mb-3">
-                  Who Should Submit?
-                </p>
-                <p className="text-sm text-white/80 leading-relaxed">
+              <div className="border border-gray-200 border-t-2 border-t-gold-400 p-6">
+                <p className="section-label mb-3">Who Should Submit?</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
                   U.S. importers who paid IEEPA-basis tariffs since 2025, freight forwarders
                   holding claims on behalf of importers, customs brokers with documented client
                   exposure, or any company with significant duty payments under an IEEPA executive
@@ -231,13 +200,11 @@ export default function LandingPage() {
       </section>
 
       {/* ── Why Sell? ────────────────────────────────────────── */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-gray-50">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-12">
-            <p className="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">
-              The Case for Selling
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-500 mb-4">
+            <p className="section-label mb-3">The Case for Selling</p>
+            <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 mb-4 leading-tight">
               Why importers sell their claims
             </h2>
             <p className="text-muted-foreground">
@@ -264,11 +231,9 @@ export default function LandingPage() {
             ].map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="rounded-xl bg-white border border-border p-6 shadow-sm hover:shadow-md transition-shadow"
+                className="bg-white border border-gray-200 border-t-2 border-t-gold-400 p-6 transition-shadow hover:shadow-sm"
               >
-                <div className="h-10 w-10 rounded-lg bg-navy-500/5 flex items-center justify-center mb-4">
-                  <Icon className="h-5 w-5 text-navy-500" />
-                </div>
+                <Icon className="h-5 w-5 text-navy-500 mb-4" />
                 <h3 className="font-semibold text-navy-500 mb-2">{title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
               </div>
@@ -281,36 +246,28 @@ export default function LandingPage() {
       <section className="py-20 bg-navy-500 text-white">
         <div className="container">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-gold-400 text-sm font-semibold uppercase tracking-wider mb-3">
-              The Process
-            </p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <p className="section-label mb-3">The Process</p>
+            <h2 className="font-display text-3xl md:text-4xl font-normal mb-4 leading-tight">
               Three steps to getting paid
             </h2>
             <p className="text-white/60">
               From first contact to wire transfer in as little as 10 business days.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 gap-8 relative">
-            {/* Connecting line (desktop) */}
-            <div className="hidden md:block absolute top-8 left-[calc(16.67%+16px)] right-[calc(16.67%+16px)] h-px bg-gold-400/20" />
+          <div className="grid md:grid-cols-3 gap-px bg-white/10">
             {steps.map(({ number, title, description }) => (
-              <div key={number} className="relative">
-                <div className="flex items-start gap-4 mb-4">
-                  <div className="flex-shrink-0 h-16 w-16 rounded-full border-2 border-gold-400/40 bg-gold-400/10 flex items-center justify-center">
-                    <span className="text-gold-400 font-bold text-lg">{number}</span>
-                  </div>
-                  <div className="pt-3">
-                    <h3 className="font-semibold text-lg">{title}</h3>
-                  </div>
-                </div>
-                <p className="text-white/60 text-sm leading-relaxed pl-0 md:pl-0">
+              <div key={number} className="bg-navy-500 p-8 border-t-2 border-t-gold-400">
+                <p className="font-display text-5xl font-normal text-gold-400/40 mb-4 leading-none">
+                  {number}
+                </p>
+                <h3 className="font-semibold text-lg mb-3">{title}</h3>
+                <p className="text-white/60 text-sm leading-relaxed">
                   {description}
                 </p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-14">
+          <div className="text-center mt-12">
             <Button variant="gold" size="xl" asChild>
               <Link href="/submit">
                 Start Your Submission <ArrowRight className="ml-1 h-5 w-5" />
@@ -323,14 +280,14 @@ export default function LandingPage() {
       {/* ── Why Choose Us ────────────────────────────────────── */}
       <section className="py-20 bg-white">
         <div className="container">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <p className="text-gold-500 text-sm font-semibold uppercase tracking-wider">
-                Why Us
-              </p>
-              <h2 className="text-3xl md:text-4xl font-bold text-navy-500 text-balance">
-                The institutional buyer importers trust
-              </h2>
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            <div className="space-y-8">
+              <div>
+                <p className="section-label mb-4">Why Us</p>
+                <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 text-balance leading-tight">
+                  The institutional buyer importers trust
+                </h2>
+              </div>
               {[
                 {
                   title: 'Committed Capital',
@@ -349,8 +306,7 @@ export default function LandingPage() {
                   body: "You pay nothing to submit. If we don't transact, you've lost nothing. The process is non-binding until you execute a purchase agreement.",
                 },
               ].map(({ title, body }) => (
-                <div key={title} className="flex gap-4">
-                  <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 shrink-0" />
+                <div key={title} className="flex gap-4 border-l-2 border-gold-400 pl-4">
                   <div>
                     <p className="font-semibold text-navy-500 mb-0.5">{title}</p>
                     <p className="text-sm text-muted-foreground leading-relaxed">{body}</p>
@@ -358,18 +314,20 @@ export default function LandingPage() {
                 </div>
               ))}
             </div>
-            <div className="rounded-2xl bg-navy-500 p-8 text-white">
-              <FileText className="h-8 w-8 text-gold-400 mb-4" />
-              <h3 className="text-xl font-semibold mb-3">Ready to find out what your claim is worth?</h3>
-              <p className="text-white/70 text-sm leading-relaxed mb-6">
+            <div className="border border-gray-200 border-t-2 border-t-gold-400 p-8">
+              <FileText className="h-6 w-6 text-gold-400 mb-5" />
+              <h3 className="font-display text-xl font-normal text-navy-500 mb-3 leading-snug">
+                Ready to find out what your claim is worth?
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-6">
                 Submit your claim details in under 10 minutes. We'll review and come back
                 to you within 24 hours with a preliminary assessment — no commitment required.
               </p>
-              <Button variant="gold" size="lg" asChild className="w-full">
-                <Link href="/submit">Submit a Claim →</Link>
+              <Button variant="default" size="lg" asChild className="w-full">
+                <Link href="/submit">Submit a Claim <ArrowRight className="ml-1 h-4 w-4" /></Link>
               </Button>
-              <p className="text-white/40 text-xs text-center mt-4">
-                Confidential · No commitment · No legal fees
+              <p className="text-muted-foreground text-xs text-center mt-4">
+                Confidential &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; No legal fees
               </p>
             </div>
           </div>
@@ -377,21 +335,21 @@ export default function LandingPage() {
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────────── */}
-      <section className="py-20 bg-muted/30" id="faq">
+      <section className="py-20 bg-white" id="faq">
         <div className="container max-w-3xl">
-          <div className="text-center mb-12">
-            <p className="text-gold-500 text-sm font-semibold uppercase tracking-wider mb-3">FAQ</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-navy-500">
+          <div className="mb-12">
+            <p className="section-label mb-3">FAQ</p>
+            <h2 className="font-display text-3xl md:text-4xl font-normal text-navy-500 leading-tight">
               Frequently asked questions
             </h2>
           </div>
-          <Accordion type="single" collapsible className="bg-white rounded-xl border border-border px-6 shadow-sm">
+          <Accordion type="single" collapsible className="divide-y divide-gray-200 border-t border-gray-200">
             {faqs.map(({ q, a }, i) => (
-              <AccordionItem key={i} value={`item-${i}`}>
-                <AccordionTrigger className="text-navy-500 font-medium text-left py-5">
+              <AccordionItem key={i} value={`item-${i}`} className="border-0">
+                <AccordionTrigger className="text-navy-500 font-medium text-left py-5 hover:no-underline">
                   {q}
                 </AccordionTrigger>
-                <AccordionContent>{a}</AccordionContent>
+                <AccordionContent className="text-muted-foreground pb-5">{a}</AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
@@ -399,12 +357,13 @@ export default function LandingPage() {
       </section>
 
       {/* ── Final CTA ────────────────────────────────────────── */}
-      <section className="py-20 bg-navy-500 text-white text-center">
+      <section className="py-24 bg-navy-500 text-white text-center">
         <div className="container max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <div className="w-12 h-0.5 bg-gold-400 mx-auto mb-8" />
+          <h2 className="font-display text-3xl md:text-5xl font-normal mb-4 leading-tight">
             Don't leave money on the table.
           </h2>
-          <p className="text-white/60 text-lg mb-8">
+          <p className="text-white/60 text-lg mb-10 max-w-lg mx-auto">
             IEEPA tariff payments are compounding daily. Get a no-obligation assessment
             of what your claim may be worth — in 24 hours.
           </p>
@@ -413,8 +372,8 @@ export default function LandingPage() {
               Get a Quote in 24 Hours <ArrowRight className="ml-1 h-5 w-5" />
             </Link>
           </Button>
-          <p className="text-white/30 text-xs mt-4">
-            Confidential · No commitment · Not legal advice
+          <p className="text-white/30 text-xs mt-5">
+            Confidential &nbsp;·&nbsp; No commitment &nbsp;·&nbsp; Not legal advice
           </p>
         </div>
       </section>

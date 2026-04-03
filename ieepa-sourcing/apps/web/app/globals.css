@@ -61,7 +61,7 @@
     text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply tracking-tight;
   }
 }
 
@@ -79,7 +79,7 @@
     @apply text-xs font-semibold uppercase tracking-widest text-gold-400;
   }
   .stat-number {
-    @apply text-4xl md:text-5xl font-bold tabular-nums;
+    @apply text-3xl md:text-4xl font-semibold tabular-nums tracking-tight;
     font-variant-numeric: tabular-nums;
   }
 }
