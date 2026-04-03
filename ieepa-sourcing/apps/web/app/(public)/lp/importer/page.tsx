@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     q: 'Do I need a lawyer?',
-    a: 'Not to sell your claim to us. We handle all legal aspects post-purchase. You're welcome to have your own counsel review the assignment agreement.',
+    a: "Not to sell your claim to us. We handle all legal aspects post-purchase. You're welcome to have your own counsel review the assignment agreement.",
   },
 ]
 
